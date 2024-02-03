@@ -60,7 +60,7 @@ class TagPrompt:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "tags": ("STRING", {"multiline": True}), 
+                "tags": ("STRING", {"forceInput": True}), 
                 "basic": ("STRING", {"multiline": True}), 
                 "remove": ("STRING", {"multiline": True}), 
             }
@@ -88,6 +88,5 @@ class TagPrompt:
     def to_prompt(self, tags, clip, basic, remove):
         remove_tags = self.remove(tags, remove)
         prompt_str = f'{basic}, {remove_tags}'
-        print(f"Danbooru Prompt : {prompt_str}")
 
-        return (prompt_str, )
+        return {"ui": {"string": [prompt_str,]}, "result": (prompt_str,)}
