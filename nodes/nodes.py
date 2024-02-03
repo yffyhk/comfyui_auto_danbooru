@@ -85,7 +85,7 @@ class TagPrompt:
         tag_str = ', '.join(tag_set)
         return tag_str
 
-    def to_prompt(self, tags, clip, basic, remove):
+    def to_prompt(self, tags, basic, remove):
         remove_tags = self.remove(tags, remove)
         prompt_str = f'{basic}, {remove_tags}'
 
