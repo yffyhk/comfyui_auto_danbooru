@@ -45,8 +45,8 @@ class GetDanbooru:
 
         return filter_tags
 
-    def download(self, text:str):
-        response = requests.get(url_)
+    def download(self, url:str):
+        response = requests.get(url)
         soup = bs.BeautifulSoup(response.text ,'lxml')
 
         elem_ul = soup.find("ul", {"class": "general-tag-list"})
