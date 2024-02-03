@@ -55,7 +55,7 @@ class GetDanbooru:
 
         return (img_tensor, prompt_str)
     
-class TextEncode:
+class TagPrompt:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -63,12 +63,12 @@ class TextEncode:
                 "tags": ("STRING", {"multiline": True}), 
                 "basic": ("STRING", {"multiline": True}), 
                 "remove": ("STRING", {"multiline": True}), 
-                "clip": ("CLIP", )}
+            }
         }
-    RETURN_TYPES = ("CONDITIONING",)
-    FUNCTION = "encode"
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "to_prompt"
 
-    CATEGORY = "conditioning"
+    CATEGORY = "Prompt"
 
     def remove(self, tags:str, remove:str):
         tags = [t.strip() for t in tags.split(',')]
@@ -85,10 +85,8 @@ class TextEncode:
         tag_str = ', '.join(tag_set)
         return tag_str
 
-    def encode(self, tags, clip, basic, remove):
+    def to_prompt(self, tags, clip, basic, remove):
         remove_tags = self.remove(tags, remove)
         prompt_str = f'{basic}, {remove_tags}'
 
-        tokens = clip.tokenize(prompt_str)
-        cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
-        return ([[cond, {"pooled_output": pooled}]], )
+        return (prompt_str, )
