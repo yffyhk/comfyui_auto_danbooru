@@ -68,7 +68,7 @@ class TagPrompt:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "to_prompt"
 
-    CATEGORY = "Prompt"
+    CATEGORY = "Danbooru"
 
     def remove(self, tags:str, remove:str):
         tags = [t.strip() for t in tags.split(',')]
