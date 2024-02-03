@@ -2,7 +2,7 @@ from .nodes.nodes import *
 
 NODE_CLASS_MAPPINGS = { 
     'GetDanbooru': GetDanbooru,
-    'TagEncode': TextEncode,
+    'TagEncode': TagPrompt,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
