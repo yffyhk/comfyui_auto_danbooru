@@ -88,5 +88,6 @@ class TagPrompt:
     def to_prompt(self, tags, clip, basic, remove):
         remove_tags = self.remove(tags, remove)
         prompt_str = f'{basic}, {remove_tags}'
+        print(f"Danbooru Prompt : {prompt_str}")
 
         return (prompt_str, )
