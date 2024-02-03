@@ -82,8 +82,10 @@ class GetDanbooru:
 
 NODE_CLASS_MAPPINGS = { 
     'GetDanbooru': GetDanbooru,
-    }
+}
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     'GetDanbooru': 'Get Danbooru',
 }
+
+__all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
