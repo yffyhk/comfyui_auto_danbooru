@@ -66,6 +66,7 @@ class TagPrompt:
             }
         }
     RETURN_TYPES = ("STRING",)
+    OUTPUT_NODE = True
     FUNCTION = "to_prompt"
 
     CATEGORY = "Danbooru"
