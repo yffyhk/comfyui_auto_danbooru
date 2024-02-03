@@ -66,7 +66,6 @@ class TagPrompt:
             }
         }
     RETURN_TYPES = ("STRING",)
-    OUTPUT_NODE = True
     FUNCTION = "to_prompt"
 
     CATEGORY = "Danbooru"
@@ -90,4 +89,4 @@ class TagPrompt:
         remove_tags = self.remove(tags, remove)
         prompt_str = f'{basic}, {remove_tags}'
 
-        return {"ui": {"string": [prompt_str,]}, "result": (prompt_str,)}
+        return (prompt_str,)
