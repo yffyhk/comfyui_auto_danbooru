@@ -51,7 +51,7 @@ class GetDanbooru:
         img_height = int(sizes[1])
 
         #check image size is | or  - 
-        img_max_length = max(img_width, img_height)
+        img_max_length = min(img_width, img_height)
         img_zoom = zoom / img_max_length
 
         img_width = int(img_width * img_zoom)
