@@ -19,8 +19,8 @@ class GetDanbooru:
             }
         }
 
-    RETURN_TYPES = ('IMAGE', 'STRING')
-    RETURN_NAMES = ('IMAGE', 'TAG')
+    RETURN_TYPES = ('IMAGE', 'STRING', 'INT', 'INT')
+    RETURN_NAMES = ('IMAGE', 'TAG', 'IMG_WIDTH', 'IMG_HEIGHT')
     FUNCTION = 'download'
     CATEGORY = 'Danbooru'
 
@@ -43,6 +43,20 @@ class GetDanbooru:
         elem_img_url = elem_img.find('li', {'id': 'post-option-view-large'}).a.attrs['href']
         elem_img_url = re.sub(r'\?.+', '', elem_img_url)
 
+        #get size and resize the output image size to same radio
+        size_info = elem_info.find('li', {'id': 'post-info-size'}).text
+        sizes = re.search("([0-9]+)x([0-9]+)", size_info).group().split('x')
+        img_width = int(sizes[0])
+        img_height = int(sizes[1])
+
+        #check image size is | or  - 
+        max_length = 1024
+        img_max_length = max(img_width, img_height)
+        img_zoom = max_length // img_max_length
+
+        img_width *= img_zoom
+        img_height *= img_zoom
+
         #download image
         img_data = requests.get(elem_img_url).content
 
@@ -53,7 +67,7 @@ class GetDanbooru:
         #PIL image to tensor
         img_tensor = to_tensor(image_)
 
-        return (img_tensor, prompt_str)
+        return (img_tensor, prompt_str, img_width, img_height)
     
 class TagPrompt:
     @classmethod
