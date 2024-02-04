@@ -16,7 +16,7 @@ class GetDanbooru:
         return {
             'required': {
                 'url': ('STRING', {'multiline': False}),
-                "zoom": ("INT", ), 
+                "zoom": ("INT", {"default": 512, "min": 64, "max": 2048}), 
             }
         }
 
