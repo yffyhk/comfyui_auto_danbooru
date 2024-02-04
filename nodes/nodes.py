@@ -5,7 +5,7 @@ import bs4 as bs
 import re
 import io
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 
 def to_tensor(image: Image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0) 
@@ -52,10 +52,10 @@ class GetDanbooru:
 
         #check image size is | or  - 
         img_max_length = max(img_width, img_height)
-        img_zoom = zoom // img_max_length
+        img_zoom = zoom / img_max_length
 
-        img_width *= img_zoom
-        img_height *= img_zoom
+        img_width = int(img_width * img_zoom)
+        img_height = int(img_height * img_zoom)
 
         #download image
         img_data = requests.get(elem_img_url).content
