@@ -15,7 +15,8 @@ class GetDanbooru:
     def INPUT_TYPES(cls):
         return {
             'required': {
-                'url': ('STRING', {'multiline': False})
+                'url': ('STRING', {'multiline': False}),
+                "zoom": ("INT", ), 
             }
         }
 
@@ -24,7 +25,7 @@ class GetDanbooru:
     FUNCTION = 'download'
     CATEGORY = 'Danbooru'
 
-    def download(self, url):
+    def download(self, url, zoom):
         response = requests.get(url)
         soup = bs.BeautifulSoup(response.text ,'lxml')
 
@@ -50,9 +51,8 @@ class GetDanbooru:
         img_height = int(sizes[1])
 
         #check image size is | or  - 
-        max_length = 1024
         img_max_length = max(img_width, img_height)
-        img_zoom = max_length // img_max_length
+        img_zoom = zoom // img_max_length
 
         img_width *= img_zoom
         img_height *= img_zoom
